@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Foodie - Food Ordering Website</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .navbar-brand {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            margin-left: 10px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #fff3e0, #ffffff);
+            padding: 80px 0;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        .hero h1 span {
+            color: #ff5722;
+        }
+
+        .hero p {
+            color: #666;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        .hero-img {
+            width: 100%;
+            max-width: 450px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 40px 0 30px;
+            font-weight: bold;
+        }
+
+        .category-btn {
+            margin: 5px;
+        }
+
+        .food-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .food-card:hover {
+            transform: translateY(-7px);
+        }
+
+        .food-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .price {
+            color: #ff5722;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .cart-box {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        footer {
+            margin-top: 30px;
+        }
+
+        @media(max-width:768px) {
+
+            .hero {
+                padding: 50px 0;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            .hero-img {
+                margin-top: 30px;
+                height: 280px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+
+    <div class="container">
+
+        <a class="navbar-brand text-danger" href="#">
+
+            <i class="bi bi-egg-fried"></i>
+
+            Foodie
+
+        </a>
+
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu"
+        >
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+
+                    <a class="nav-link active" href="#">
+                        Home
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="#menuSection">
+                        Menu
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="#cartSection">
+
+                        Cart
+
+                        <span
+                            class="badge bg-danger"
+                            id="cartCount"
+                        >
+                            0
+                        </span>
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="#contact">
+                        Contact
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-6">
+
+                <h1>
+
+                    Delicious Food
+
+                    <span>Delivered</span>
+
+                    To You
+
+                </h1>
+
+
+                <p>
+
+                    Order your favourite food from Foodie
+                    and enjoy delicious meals at your home.
+
+                </p>
+
+
+                <a
+                    href="#menuSection"
+                    class="btn btn-danger btn-lg"
+                >
+
+                    Order Now
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+            <div class="col-md-6 text-center">
+
+                <img
+                    src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=700&q=80"
+                    class="hero-img"
+                    alt="Food"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= MENU ================= -->
+
+<section id="menuSection" class="py-5">
+
+    <div class="container">
+
+        <h2 class="section-title">
+
+            Our
+
+            <span class="text-danger">
+                Menu
+            </span>
+
+        </h2>
+
+
+
+        <!-- SEARCH -->
+
+        <div class="row mb-4">
+
+            <div class="col-md-6 mx-auto">
+
+                <input
+                    type="text"
+                    id="searchBox"
+                    class="form-control"
+                    placeholder="Search food..."
+                    onkeyup="searchFood()"
+                >
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CATEGORY BUTTONS -->
+
+        <div class="text-center mb-4">
+
+            <button
+                class="btn btn-danger category-btn"
+                onclick="filterFood('All')"
+            >
+                All
+            </button>
+
+
+            <button
+                class="btn btn-outline-danger category-btn"
+                onclick="filterFood('Pizza')"
+            >
+                Pizza
+            </button>
+
+
+            <button
+                class="btn btn-outline-danger category-btn"
+                onclick="filterFood('Burger')"
+            >
+                Burger
+            </button>
+
+
+            <button
+                class="btn btn-outline-danger category-btn"
+                onclick="filterFood('Biryani')"
+            >
+                Biryani
+            </button>
+
+
+            <button
+                class="btn btn-outline-danger category-btn"
+                onclick="filterFood('Dessert')"
+            >
+                Dessert
+            </button>
+
+        </div>
+
+
+
+        <!-- FOOD LIST -->
+
+        <div
+            class="row g-4"
+            id="foodList"
+        ></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= CART ================= -->
+
+<section
+    id="cartSection"
+    class="py-5 bg-light"
+>
+
+    <div class="container">
+
+        <h2 class="section-title">
+
+            <i class="bi bi-cart3"></i>
+
+            Your Cart
+
+        </h2>
+
+
+        <div class="cart-box">
+
+            <div id="cartItems">
+
+                <p class="text-center text-muted">
+
+                    Your cart is empty.
+
+                </p>
+
+            </div>
+
+
+            <hr>
+
+
+            <div class="d-flex justify-content-between">
+
+                <h4>
+                    Total:
+                </h4>
+
+
+                <h4 class="text-danger">
+
+                    ₹<span id="totalPrice">0</span>
+
+                </h4>
+
+            </div>
+
+
+            <button
+                class="btn btn-danger w-100 mt-3"
+                onclick="checkout()"
+            >
+
+                <i class="bi bi-bag-check"></i>
+
+                Checkout
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact" class="py-5">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Contact Us
+        </h2>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-md-4 text-center">
+
+                <i
+                    class="bi bi-geo-alt text-danger"
+                    style="font-size:40px;"
+                ></i>
+
+                <h5>
+                    Address
+                </h5>
+
+                <p>
+                    Tirunelveli, Tamil Nadu
+                </p>
+
+            </div>
+
+
+
+            <div class="col-md-4 text-center">
+
+                <i
+                    class="bi bi-telephone text-danger"
+                    style="font-size:40px;"
+                ></i>
+
+                <h5>
+                    Phone
+                </h5>
+
+                <p>
+                    +91 98765 43210
+                </p>
+
+            </div>
+
+
+
+            <div class="col-md-4 text-center">
+
+                <i
+                    class="bi bi-envelope text-danger"
+                    style="font-size:40px;"
+                ></i>
+
+                <h5>
+                    Email
+                </h5>
+
+                <p>
+                    foodie@gmail.com
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="bg-dark text-white text-center py-4">
+
+    <p class="mb-0">
+
+        © 2026 Foodie |
+        Food Ordering Website
+
+    </p>
+
+</footer>
+
+
+
+<!-- Bootstrap JavaScript -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+
+<script>
+
+
+// ================= FOOD DATA =================
+
+let foods = [
+
+    {
+        name: "Chicken Pizza",
+        category: "Pizza",
+        price: 250,
+        image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+        name: "Veg Pizza",
+        category: "Pizza",
+        price: 200,
+        image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+        name: "Chicken Burger",
+        category: "Burger",
+        price: 180,
+        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+        name: "Cheese Burger",
+        category: "Burger",
+        price: 150,
+        image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+        name: "Chicken Biryani",
+        category: "Biryani",
+        price: 220,
+        image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+        name: "Veg Biryani",
+        category: "Biryani",
+        price: 160,
+        image: "https://images.unsplash.com/photo-1631515242808-497c3fbd3972?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+        name: "Chocolate Cake",
+        category: "Dessert",
+        price: 120,
+        image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80"
+    },
+
+
+    {
+        name: "Ice Cream",
+        category: "Dessert",
+        price: 100,
+        image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80"
+    }
+
+];
+
+
+
+// ================= CART =================
+
+let cart = [];
+
+
+
+// ================= DISPLAY FOOD =================
+
+function displayFood(data) {
+
+    let foodList =
+        document.getElementById("foodList");
+
+    foodList.innerHTML = "";
+
+
+    data.forEach(function(food) {
+
+        foodList.innerHTML += `
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card food-card shadow-sm h-100">
+
+                    <img
+                        src="${food.image}"
+                        class="card-img-top"
+                        alt="${food.name}"
+                    >
+
+
+                    <div class="card-body">
+
+                        <span class="badge bg-danger mb-2">
+
+                            ${food.category}
+
+                        </span>
+
+
+                        <h5 class="card-title">
+
+                            ${food.name}
+
+                        </h5>
+
+
+                        <p class="price">
+
+                            ₹${food.price}
+
+                        </p>
+
+
+                        <button
+                            class="btn btn-danger w-100"
+                            onclick="addToCart(${foods.indexOf(food)})"
+                        >
+
+                            <i class="bi bi-cart-plus"></i>
+
+                            Add to Cart
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+
+// ================= ADD TO CART =================
+
+function addToCart(index) {
+
+    let food = foods[index];
+
+
+    let existingItem = cart.find(function(item) {
+
+        return item.name === food.name;
+
+    });
+
+
+    if (existingItem) {
+
+        existingItem.quantity++;
+
+    }
+
+    else {
+
+        cart.push({
+
+            name: food.name,
+
+            price: food.price,
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    displayCart();
+
+
+    alert(
+        food.name + " added to cart!"
+    );
+
+}
+
+
+
+// ================= DISPLAY CART =================
+
+function displayCart() {
+
+    let cartItems =
+        document.getElementById("cartItems");
+
+
+    cartItems.innerHTML = "";
+
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML = `
+
+            <p class="text-center text-muted">
+
+                Your cart is empty.
+
+            </p>
+
+        `;
+
+    }
+
+
+    let total = 0;
+
+    let count = 0;
+
+
+    cart.forEach(function(item, index) {
+
+        let itemTotal =
+            item.price * item.quantity;
+
+
+        total = total + itemTotal;
+
+        count = count + item.quantity;
+
+
+        cartItems.innerHTML += `
+
+            <div class="cart-item">
+
+                <div class="row align-items-center">
+
+
+                    <div class="col-md-5">
+
+                        <h6>
+                            ${item.name}
+                        </h6>
+
+                        <small>
+                            ₹${item.price} each
+                        </small>
+
+                    </div>
+
+
+                    <div class="col-md-3">
+
+                        <button
+                            class="btn btn-sm btn-outline-danger"
+                            onclick="decreaseQuantity(${index})"
+                        >
+                            -
+                        </button>
+
+
+                        <span class="mx-2">
+
+                            ${item.quantity}
+
+                        </span>
+
+
+                        <button
+                            class="btn btn-sm btn-outline-danger"
+                            onclick="increaseQuantity(${index})"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <div class="col-md-2">
+
+                        <strong>
+
+                            ₹${itemTotal}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="col-md-2">
+
+                        <button
+                            class="btn btn-sm btn-danger"
+                            onclick="removeItem(${index})"
+                        >
+
+                            <i class="bi bi-trash"></i>
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    document.getElementById("totalPrice").innerText =
+        total;
+
+
+    document.getElementById("cartCount").innerText =
+        count;
+
+}
+
+
+
+// ================= INCREASE =================
+
+function increaseQuantity(index) {
+
+    cart[index].quantity++;
+
+    displayCart();
+
+}
+
+
+
+// ================= DECREASE =================
+
+function decreaseQuantity(index) {
+
+    if (cart[index].quantity > 1) {
+
+        cart[index].quantity--;
+
+    }
+
+    else {
+
+        cart.splice(index, 1);
+
+    }
+
+
+    displayCart();
+
+}
+
+
+
+// ================= REMOVE =================
+
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    displayCart();
+
+}
+
+
+
+// ================= SEARCH =================
+
+function searchFood() {
+
+    let searchText =
+        document.getElementById("searchBox")
+        .value
+        .toLowerCase();
+
+
+    let result = foods.filter(function(food) {
+
+        return food.name
+            .toLowerCase()
+            .includes(searchText);
+
+    });
+
+
+    displayFood(result);
+
+}
+
+
+
+// ================= FILTER =================
+
+function filterFood(category) {
+
+    if (category === "All") {
+
+        displayFood(foods);
+
+    }
+
+    else {
+
+        let result =
+            foods.filter(function(food) {
+
+                return food.category === category;
+
+            });
+
+
+        displayFood(result);
+
+    }
+
+}
+
+
+
+// ================= CHECKOUT =================
+
+function checkout() {
+
+    if (cart.length === 0) {
+
+        alert(
+            "Please add food to cart first!"
+        );
+
+        return;
+
+    }
+
+
+    let total =
+        document.getElementById("totalPrice")
+        .innerText;
+
+
+    alert(
+
+        "Order placed successfully!\n\n" +
+
+        "Total Amount: ₹" + total
+
+    );
+
+
+    cart = [];
+
+    displayCart();
+
+}
+
+
+
+// ================= INITIAL DISPLAY =================
+
+displayFood(foods);
+
+displayCart();
+
+
+</script>
+
+</body>
+
+</html>
